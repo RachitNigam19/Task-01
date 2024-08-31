@@ -14,9 +14,9 @@ jobs:
 
       - name: Run monitoring script
         run: |
-          bash /path/to/monitoring_script.sh
-      
+          bash C:/Users/Rachit Nigam/OneDrive/Desktop/Task 1/scripts/monitoring_script.sh
+        
       - name: Send notification if threat detected
         if: failure()
         run: |
-          bash /path/to/notification_script.sh
+          bash C:/Users/Rachit Nigam/OneDrive/Desktop/Task 1/scripts/notification_script.sh
