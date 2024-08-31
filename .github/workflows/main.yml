@@ -1,0 +1,22 @@
+name: Monitor and Notify
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run monitoring script
+        run: |
+          bash /path/to/monitoring_script.sh
+      
+      - name: Send notification if threat detected
+        if: failure()
+        run: |
+          bash /path/to/notification_script.sh
