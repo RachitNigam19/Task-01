@@ -18,8 +18,17 @@ jobs:
           chmod +x ./scripts/monitoring_script.sh
           ./scripts/monitoring_script.sh
 
+      - name: Check for threats
+        id: check_threats
+        run: |
+          if grep -q "threat_detected" ./scripts/monitoring_script_output.txt; then
+            echo "::set-output name=threat_detected::true"
+          else
+            echo "::set-output name=threat_detected::false"
+          fi
+
       - name: Send notification if threat detected
-        if: ${{ steps.monitor.outputs.threat_detected == 'true' }}
+        if: steps.check_threats.outputs.threat_detected == 'true'
         run: |
           chmod +x ./scripts/notification_script.sh
           ./scripts/notification_script.sh
