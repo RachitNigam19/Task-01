@@ -13,8 +13,9 @@ jobs:
       - name: Run monitoring script
         id: monitor
         run: |
-          chmod +x ./scripts/monitoring_script.sh
-          ./scripts/monitoring_script.sh
+          curl -o monitoring_script.sh https://raw.githubusercontent.com/RachitNigam19/Task-01/main/scripts/monitoring_script.sh
+          chmod +x monitoring_script.sh
+          ./monitoring_script.sh
 
       - name: Set commit history flag
         run: |
@@ -27,5 +28,6 @@ jobs:
       - name: Send notification if threat detected
         if: steps.monitor.outputs.threat_detected == 'true' && steps.monitor.outputs.only_one_commit == 'false'
         run: |
-          chmod +x ./scripts/notification_script.sh
-          ./scripts/notification_script.sh
+          curl -o notification_script.sh https://raw.githubusercontent.com/RachitNigam19/Task-01/main/scripts/notification_script.sh
+          chmod +x notification_script.sh
+          ./notification_script.sh
