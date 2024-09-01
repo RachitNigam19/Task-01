@@ -3,12 +3,13 @@ class Animal:
     def __init__(self, name, species):
         self.name = name
         self.species = species
-    
+
     def sound(self):
         return "Some generic animal sound"
-    
+
     def info(self):
         return f"{self.name} is a {self.species}."
+
 
 # Child class inheriting from Animal
 class Dog(Animal):
@@ -24,6 +25,7 @@ class Dog(Animal):
     # Additional method specific to Dog
     def show_breed(self):
         return f"{self.name} is a {self.breed}."
+
 
 # Create an instance of Animal
 generic_animal = Animal("Generic Animal", "Unknown")

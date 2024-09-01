@@ -10,13 +10,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Run monitoring script
+        id: monitor
         run: |
-          bash C:/Users/Rachit Nigam/OneDrive/Desktop/Task 1/scripts/monitoring_script.sh
-        
+          chmod +x ./scripts/monitoring_script.sh
+          ./scripts/monitoring_script.sh
+
+      - name: Set commit history flag
+        run: |
+          if [ $(git rev-list --count HEAD) -le 1 ]; then
+            echo "::set-output name=only_one_commit::true"
+          else
+            echo "::set-output name=only_one_commit::false"
+          fi
+
       - name: Send notification if threat detected
-        if: failure()
+        if: steps.monitor.outputs.threat_detected == 'true' && steps.monitor.outputs.only_one_commit == 'false'
         run: |
-          bash C:/Users/Rachit Nigam/OneDrive/Desktop/Task 1/scripts/notification_script.sh
+          chmod +x ./scripts/notification_script.sh
+          ./scripts/notification_script.sh
