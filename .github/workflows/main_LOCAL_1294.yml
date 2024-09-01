@@ -1,3 +1,4 @@
+name: Monitor and Notify
 
 on:
   push:

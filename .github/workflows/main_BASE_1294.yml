@@ -1,0 +1,22 @@
+name: Monitor and Notify
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run monitoring script
+        run: |
+          bash C:/Users/Rachit Nigam/OneDrive/Desktop/Task 1/scripts/monitoring_script.sh
+        
+      - name: Send notification if threat detected
+        if: failure()
+        run: |
+          bash C:/Users/Rachit Nigam/OneDrive/Desktop/Task 1/scripts/notification_script.sh
